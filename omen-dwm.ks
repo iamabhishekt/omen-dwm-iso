@@ -214,6 +214,18 @@ HandleLidSwitchExternalPower=ignore
 HandleLidSwitchDocked=ignore
 EOF
 
+# --- Titus's dotfiles theming: rofi, kitty, dunst, picom, GTK ---
+cd /tmp
+git clone --depth 1 https://github.com/ChrisTitusTech/dotfiles.git titus-dotfiles || \
+    echo "WARN: dotfiles clone failed" >> /root/ks-post.log
+if [ -d titus-dotfiles/.config ]; then
+    mkdir -p /etc/skel/.config
+    for cfg in rofi kitty dunst picom nvim fastfetch; do
+        [ -d "titus-dotfiles/.config/$cfg" ] && cp -r "titus-dotfiles/.config/$cfg" /etc/skel/.config/
+    done
+fi
+rm -rf /tmp/titus-dotfiles
+
 # --- Sane defaults for every new user (skel) ---
 mkdir -p /etc/skel/.config/autorandr /etc/skel/.config/picom
 
