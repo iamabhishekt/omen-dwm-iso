@@ -21,8 +21,8 @@ jobs:
             fedora:${{ inputs.releasever }} \
             bash -c '
               set -e
-              dnf install -y lorax-lmc-novirt pykickstart anaconda-live \
-                             livecd-tools spin-kickstarts
+              dnf install -y --setopt=max_parallel_downloads=3 --allowerasing \
+               lorax-lmc-novirt pykickstart anaconda-live livecd-tools
               ksvalidator omen-dwm.ks || true
               livemedia-creator \
                 --ks omen-dwm.ks \
