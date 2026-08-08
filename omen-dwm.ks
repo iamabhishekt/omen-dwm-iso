@@ -112,8 +112,13 @@ unzip
 podman
 distrobox
 steam
+steam-devices
 mangohud
 goverlay
+gamemode
+gamescope
+gamescope-session
+lutris
 
 # --- Fonts ---
 jetbrains-mono-fonts-all
@@ -174,15 +179,23 @@ else
     echo "WARN: lightdm missing, fell back to startx" >> /root/ks-post.log
 fi
 
-# --- NVIDIA PRIME offload wrapper (Intel drives desktop, 3070 on demand) ---
+# --- NVIDIA PRIME offload wrapper with gamemode (Intel drives desktop, 3070 on demand) ---
 cat > /usr/local/bin/nvrun <<'EOF'
 #!/bin/bash
 export __NV_PRIME_RENDER_OFFLOAD=1
 export __GLX_VENDOR_LIBRARY_NAME=nvidia
 export __VK_LAYER_NV_optimus=NVIDIA_only
-exec "$@"
+# gamemode boosts CPU governor while the game runs; harmless if not installed
+exec gamemoderun "$@"
 EOF
 chmod +x /usr/local/bin/nvrun
+
+# --- NVIDIA kernel modesetting (needed for tear-free + external ports) ---
+mkdir -p /etc/modprobe.d
+cat > /etc/modprobe.d/nvidia-omen.conf <<'EOF'
+options nvidia-drm modeset=1 fbdev=1
+options nvidia NVreg_PreserveVideoMemoryAllocations=1
+EOF
 
 # --- Power services ---
 systemctl enable tlp.service

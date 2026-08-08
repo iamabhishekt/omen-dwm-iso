@@ -22,7 +22,7 @@ jobs:
             bash -c '
               set -e
               dnf install -y --setopt=max_parallel_downloads=3 --allowerasing \
-               lorax-lmc-novirt pykickstart anaconda-live livecd-tools
+                             lorax-lmc-novirt pykickstart anaconda-live livecd-tools
               ksvalidator omen-dwm.ks || true
               livemedia-creator \
                 --ks omen-dwm.ks \
@@ -31,7 +31,7 @@ jobs:
                 --iso-only \
                 --iso-name omen-dwm-fedora${{ inputs.releasever }}.iso \
                 --project "Omen-dwm" \
-                --title "Omen dwm Fedora ${{ inputs.releasever }}" \
+                --volid "Omen-dwm-F${{ inputs.releasever }}" \
                 --releasever ${{ inputs.releasever }} \
                 --resultdir /work/build
             '

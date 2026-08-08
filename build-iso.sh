@@ -23,7 +23,7 @@ sudo livemedia-creator \
     --iso-only \
     --iso-name "${ISO_NAME}" \
     --project "Omen-dwm" \
-    --title "Omen dwm Fedora ${RELEASEVER}" \
+    --volid "Omen-dwm-F${RELEASEVER}" \
     --releasever "${RELEASEVER}" \
     --resultdir ./build
 
