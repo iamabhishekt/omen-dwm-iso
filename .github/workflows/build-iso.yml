@@ -1,0 +1,44 @@
+name: Build Omen dwm ISO
+
+on:
+  workflow_dispatch:          # "Run workflow" button in GitHub Actions tab
+    inputs:
+      releasever:
+        description: Fedora version
+        default: "44"
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build ISO inside a Fedora container
+        run: |
+          sudo podman run --rm --privileged \
+            -v "$PWD":/work:Z -w /work \
+            fedora:${{ inputs.releasever }} \
+            bash -c '
+              set -e
+              dnf install -y lorax-lmc-novirt pykickstart anaconda-live \
+                             livecd-tools spin-kickstarts
+              ksvalidator omen-dwm.ks || true
+              livemedia-creator \
+                --ks omen-dwm.ks \
+                --no-virt \
+                --make-iso \
+                --iso-only \
+                --iso-name omen-dwm-fedora${{ inputs.releasever }}.iso \
+                --project "Omen-dwm" \
+                --title "Omen dwm Fedora ${{ inputs.releasever }}" \
+                --releasever ${{ inputs.releasever }} \
+                --resultdir /work/build
+            '
+
+      - name: Upload ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: omen-dwm-iso
+          path: build/*.iso
+          retention-days: 14
