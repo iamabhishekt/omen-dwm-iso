@@ -35,6 +35,10 @@ services --enabled=NetworkManager,sshd,akmods
 kernel
 kernel-devel
 kernel-headers
+dracut-live
+dracut-config-generic
+anaconda-live
+livesys-scripts
 grub2-efi-x64
 shim-x64
 efibootmgr
