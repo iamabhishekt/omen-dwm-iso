@@ -203,6 +203,17 @@ EOF
 # --- Power services ---
 systemctl enable tlp.service
 
+# --- Lid behavior for docked multimonitor use ---
+# On AC power: closing the lid does NOT suspend — laptop becomes a "desktop"
+# On battery: closing the lid suspends (protects the laptop in a bag)
+mkdir -p /etc/systemd/logind.conf.d
+cat > /etc/systemd/logind.conf.d/99-omen-lid.conf <<'EOF'
+[Login]
+HandleLidSwitch=suspend
+HandleLidSwitchExternalPower=ignore
+HandleLidSwitchDocked=ignore
+EOF
+
 # --- Sane defaults for every new user (skel) ---
 mkdir -p /etc/skel/.config/autorandr /etc/skel/.config/picom
 
