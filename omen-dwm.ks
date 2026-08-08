@@ -12,9 +12,8 @@ repo --name=rpmfusion-free --mirrorlist="https://mirrors.rpmfusion.org/mirrorlis
 repo --name=rpmfusion-nonfree --mirrorlist="https://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-$releasever&arch=$basearch"
 
 # --- Disk / system ---
-zerombr
-clearpart --all --initlabel
-autopart --type=plain --fstype=ext4
+# live image rootfs size (the live environment; the installer copies this)
+part / --size=12288 --fstype=ext4
 bootloader --location=mbr --append="quiet rhgb"
 timezone UTC --utc
 keyboard us
