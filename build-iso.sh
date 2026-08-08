@@ -15,6 +15,10 @@ sudo dnf install -y livecd-tools spin-kickstarts pykickstart
 echo "==> Validating kickstart"
 ksvalidator omen-dwm.ks || echo "ksvalidator warnings above are usually OK for repo lines"
 
+# containers/minimal systems may lack a running system bus (anaconda needs it)
+sudo mkdir -p /run/dbus
+sudo dbus-daemon --system --fork 2>/dev/null || true
+
 echo "==> Building ISO (this takes 15-40 min)"
 sudo livemedia-creator \
     --ks omen-dwm.ks \

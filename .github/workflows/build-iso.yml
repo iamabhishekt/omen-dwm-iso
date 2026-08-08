@@ -24,6 +24,8 @@ jobs:
               dnf install -y --setopt=max_parallel_downloads=3 --allowerasing \
                              lorax-lmc-novirt pykickstart anaconda-live livecd-tools
               ksvalidator omen-dwm.ks || true
+              mkdir -p /run/dbus
+              dbus-daemon --system --fork
               livemedia-creator \
                 --ks omen-dwm.ks \
                 --no-virt \
