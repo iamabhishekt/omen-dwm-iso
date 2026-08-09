@@ -24,7 +24,7 @@ echo "==> 3/8  dwm desktop stack (Titus's setup)"
 sudo dnf install -y \
   gcc make libX11-devel libXft-devel libXinerama-devel fontconfig-devel freetype-devel \
   git picom rofi kitty feh dunst lxappearance papirus-icon-theme \
-  NetworkManager-applet pavucontrol pipewire wireplumber playerctl \
+  nm-connection-editor pavucontrol pipewire wireplumber playerctl \
   flameshot Thunar gvfs udiskie polkit lxpolkit \
   lightdm lightdm-gtk arandr autorandr \
   jetbrains-mono-fonts-all fontawesome-6-free-fonts
