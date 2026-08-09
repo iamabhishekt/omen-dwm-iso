@@ -24,7 +24,9 @@ firewall --enabled
 
 # CHANGE THESE:
 rootpw --lock
-user --name=abhishek --password=1998@Abhi --groups=wheel --shell=/bin/bash
+user --name=omen --password=omen --groups=wheel --shell=/bin/bash
+# anaconda's live install expects the standard liveuser account to exist
+user --name=liveuser --password=liveuser --groups=wheel --shell=/bin/bash --nocreatehome
 
 services --enabled=NetworkManager,sshd,akmods
 
