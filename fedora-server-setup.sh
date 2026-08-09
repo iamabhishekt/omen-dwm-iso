@@ -18,15 +18,15 @@ sudo dnf install -y \
   xorg-x11-server-Xorg xorg-x11-xinit xsetroot xrandr \
   akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-cuda \
   xorg-x11-drv-nvidia-power xorg-x11-drv-nvidia-libs.i686 \
-  akmods kernel-devel mesa-dri-drivers intel-media-driver
+  akmods kernel-devel mesa-dri-drivers libva-utils intel-media-driver
 
 echo "==> 3/8  dwm desktop stack (Titus's setup)"
 sudo dnf install -y \
   gcc make libX11-devel libXft-devel libXinerama-devel fontconfig-devel freetype-devel \
   git picom rofi kitty feh dunst lxappearance papirus-icon-theme \
   NetworkManager-applet pavucontrol pipewire wireplumber playerctl \
-  flameshot thunar gvfs udiskie polkit lxpolkit \
-  lightdm lightdm-gtk-greeter arandr autorandr \
+  flameshot Thunar gvfs udiskie polkit lxpolkit \
+  lightdm lightdm-gtk arandr autorandr \
   jetbrains-mono-fonts-all fontawesome-6-free-fonts
 
 echo "==> 4/8  Gaming + dev"

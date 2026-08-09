@@ -97,7 +97,7 @@ pipewire-pulseaudio
 wireplumber
 playerctl
 flameshot
-thunar
+Thunar
 gvfs
 udiskie
 
@@ -107,8 +107,8 @@ autorandr
 
 # --- LightDM (WITH greeter — the fix for Titus's bug) ---
 lightdm
-lightdm-gtk-greeter
-lightdm-gtk-greeter-settings
+lightdm-gtk
+lightdm-settings
 
 # --- Dev / ML / gaming ---
 neovim
