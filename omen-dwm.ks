@@ -39,6 +39,7 @@ dracut-config-generic
 anaconda-live
 livesys-scripts
 grub2-efi-x64
+grub2-efi-x64-cdboot
 grub2-pc-modules
 grub2-tools
 shim-x64
