@@ -15,7 +15,7 @@ sudo dnf install -y \
 
 echo "==> 2/8  X11 + NVIDIA hybrid stack"
 sudo dnf install -y \
-  xorg-x11-server-Xorg xorg-x11-xinit xorg-x11-utils xsetroot xrandr \
+  xorg-x11-server-Xorg xorg-x11-xinit xorg-x11-server-utils xsetroot xrandr \
   akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-cuda \
   xorg-x11-drv-nvidia-power xorg-x11-drv-nvidia-libs.i686 \
   akmods kernel-devel mesa-dri-drivers intel-media-driver
