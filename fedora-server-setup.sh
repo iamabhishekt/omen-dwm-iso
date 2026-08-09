@@ -53,11 +53,16 @@ fi
 echo "==> 6/8  Titus's dotfiles (rofi/kitty/dunst/picom)"
 cd /tmp
 rm -rf titus-dotfiles
-git clone --depth 1 https://github.com/ChrisTitusTech/dotfiles.git titus-dotfiles
-mkdir -p "$HOME/.config"
-for cfg in rofi kitty dunst picom nvim fastfetch; do
-  [ -d "titus-dotfiles/.config/$cfg" ] && cp -r "titus-dotfiles/.config/$cfg" "$HOME/.config/"
-done
+# Titus's dotfiles repo is no longer public; dwm-titus already seeds its
+# own user config. Try the clone, but never fail the script over it.
+if git clone --depth 1 https://github.com/ChrisTitusTech/dotfiles.git titus-dotfiles; then
+  mkdir -p "$HOME/.config"
+  for cfg in rofi kitty dunst picom nvim fastfetch; do
+    [ -d "titus-dotfiles/.config/$cfg" ] && cp -r "titus-dotfiles/.config/$cfg" "$HOME/.config/"
+  done
+else
+  echo "    (dotfiles repo unavailable - skipping; dwm-titus config already seeded)"
+fi
 
 echo "==> 7/8  NVIDIA + power + lid config"
 printf '#!/bin/bash\nexport __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia __VK_LAYER_NV_optimus=NVIDIA_only\nexec gamemoderun "$@"\n' \
